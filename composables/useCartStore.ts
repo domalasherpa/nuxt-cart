@@ -1,22 +1,14 @@
 import { defineStore } from "pinia";
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import type { Product } from '~/types/product';
+import type { Item } from '~/types/cartItem.js';
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
-interface Product {
-	id: number;
-	title: string;
-	price: number;
-	description: string;
-	category: string;
-	image: string;
-	availableQuantity: number;
-}
-
 interface Cart{
-    [key:number] : Product & {quantity:number}
+    [key:number] : Item
 }
 
 export const useCartStore = defineStore('cartStore', ()=>{

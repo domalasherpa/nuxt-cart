@@ -1,23 +1,13 @@
 import { defineStore } from "pinia";
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import type { Item } from "~/types/cartItem";
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
-interface CartItems {
-	id: number;
-	title: string;
-	price: number;
-	description: string;
-	category: string;
-	image: string;
-	availableQuantity: number;
-    quantity:number;
-}
-
 interface Items{
-    [key:number] : CartItems
+    [key:number] : Item
 }
 
 export const useSelectedItems = defineStore('selectedItems', ()=>{
@@ -34,7 +24,7 @@ export const useSelectedItems = defineStore('selectedItems', ()=>{
         delete selectedItems[productId];
     }
 
-    const addItem = (product:CartItems)=>{
+    const addItem = (product:Item)=>{
         selectedItems[product.id] = product
     }
 
