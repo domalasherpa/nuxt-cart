@@ -8,6 +8,11 @@ export default defineNuxtConfig({
     'pinia-plugin-persistedstate/nuxt',
     '@nuxt/icon',
   ],
+  routeRules:{
+    "/": {
+      redirect: "/products"
+    }
+  },
   postcss: {
     plugins: {
       tailwindcss: {},
