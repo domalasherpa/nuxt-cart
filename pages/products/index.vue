@@ -1,26 +1,14 @@
 <script setup lang="ts">;
-
-interface Product{
-    id: number;
-    title: string;
-    price: number;
-    description: string;
-    category: string;
-    image: string;
-}
+import type { Product } from '~/types/product';
 
 interface Response{
-    [index: number] : Product;
+    [index: number] : Omit<Product, 'availableQuantity'>;
 }
 
 const {data: products, status} = await useFetch<Response>("https://fakestoreapi.com/products");
-
 </script>
 
 <template>
-    <div v-if="status === 'pending'" class="text-center">
-        <h1>Loading...</h1>
-    </div>
     <div v-if="status === 'error'">
         <h1>Whoops! Something went wrong. Please try again later.</h1>
     </div>

@@ -1,17 +1,7 @@
 <script setup lang="ts">
     import { useSelectedItems } from '~/composables/useSelectedItems.js';
     import { useCartStore } from '~/composables/useCartStore.js';
-
-    interface Item {
-        id: number;
-        title: string;
-        price: number;
-        description: string;
-        category: string;
-        image: string;
-        availableQuantity: number;
-        quantity:number;
-    }
+    import type { Item } from '~/types/cartItem';
 
     const route = useRoute();
     const router = useRouter();

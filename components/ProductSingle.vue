@@ -1,17 +1,14 @@
 <script setup lang="ts">
-interface Product{
-    id: number;
-    title: string;
-    price: number;
-    image: string;
-}
-
+import type { Product } from '~/types/product';
 defineProps({
-    product: Object as PropType<Product>
+    product: {
+        type: Object as () => Pick<Product, 'id' | 'title' | 'price' | 'image'>,
+        required: true
+    }
 });
 </script>
 <template>    
-    <div v-if="product !== undefined" class="bg-white cursor-pointer flex-col h-full justify-between hover:shadow-md">
+    <div class="bg-white cursor-pointer flex-col h-full justify-between hover:shadow-md">
         <div class="h-40 border-2 border-orange-200 shadow">
             <NuxtLink :to="'/products/' + product.id">
                 <img :src="product.image" alt="product" class="h-full w-full object-contain" />
@@ -27,8 +24,3 @@ defineProps({
         </div>
     </div>
 </template>
-
-
-
-<style scoped>
-</style>

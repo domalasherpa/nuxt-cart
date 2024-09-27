@@ -2,6 +2,7 @@
 
 import { useCartStore } from '~/composables/useCartStore';
 import { useBuyNow } from '~/composables/useBuyNow';
+import type { Product } from '~/types/product';
 
 const route = useRoute();
 const router = useRouter();
@@ -12,18 +13,9 @@ const responseStatus = ref<'success' | 'pending' | 'idle' | 'error' >();
 const minQuantity = 1;
 const quantity = ref(minQuantity);
 
-interface Product {
-	id: number;
-	title: string;
-	price: number;
-	description: string;
-	category: string;
-	image: string;
-	availableQuantity: number;
-}
-
 const product = ref<Product>();
 
+//yeslai herne
 watchEffect(async()=>{
 	const {data,status} = await useFetch<Product>(`https://fakestoreapi.com/products/${route.params.id}`);
 	responseStatus.value = status.value;
@@ -34,7 +26,7 @@ watchEffect(async()=>{
 })
 
 
-const addTocart = ()=>{
+const addToCart = ()=>{
 	if(product.value?.id){
 		carts.addItem(product.value, quantity.value);
 		alert("added to carts");
@@ -94,10 +86,7 @@ const handleBuyNow = ()=>{
 </script>
 
 <template>
-	<div v-if="responseStatus === 'pending'" class="text-center">
-		<p>Loading...</p>
-	</div>
-	<div v-else-if="responseStatus === 'error'" class="text-center">
+	<div v-if="responseStatus === 'error'" class="text-center">
 		<p>Something went wrong</p>
 	</div>
 	<div v-else-if="product" class="flex flex-col w-screen items-center">
@@ -131,7 +120,7 @@ const handleBuyNow = ()=>{
 				</div>
 				<div class="space-x-2 w-full flex">
 					<button class="bg-blue-400 px-4 py-1 font-semibold text-white" @click="handleBuyNow">Buy Now</button>
-					<button class="bg-orange-400 px-4 py-1 font-semibold text-white" @click="addTocart">Add to
+					<button class="bg-orange-400 px-4 py-1 font-semibold text-white" @click="addToCart">Add to
 						Cart</button>
 				</div>
 			</div>
