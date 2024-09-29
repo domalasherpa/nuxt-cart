@@ -9,22 +9,16 @@ const router = useRouter();
 const carts = useCartStore();
 const buyNowItem = useBuyNow();
 
-const responseStatus = ref<'success' | 'pending' | 'idle' | 'error' >();
 const minQuantity = 1;
 const quantity = ref(minQuantity);
 
 const product = ref<Product>();
 
-//yeslai herne
-watchEffect(async()=>{
-	const {data,status} = await useFetch<Product>(`https://fakestoreapi.com/products/${route.params.id}`);
-	responseStatus.value = status.value;
-	if(status.value === 'success' && data.value){
-		product.value = data.value;
-		product.value.availableQuantity = Math.floor(Math.random() * 100) + 1;
-	}
-})
-
+const {data,status} = await useFetch<Product>(`https://fakestoreapi.com/products/${route.params.id}`);
+if(status.value === 'success' && data.value){
+	product.value = data.value;
+	product.value.availableQuantity = Math.floor(Math.random() * 100) + 1;
+}
 
 const addToCart = ()=>{
 	if(product.value?.id){
@@ -82,11 +76,10 @@ const handleBuyNow = ()=>{
 		});
 	}
 }
-
 </script>
 
 <template>
-	<div v-if="responseStatus === 'error'" class="text-center">
+	<div v-if="status === 'error'" class="text-center">
 		<p>Something went wrong</p>
 	</div>
 	<div v-else-if="product" class="flex flex-col w-screen items-center">
