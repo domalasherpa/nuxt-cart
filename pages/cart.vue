@@ -69,7 +69,7 @@ const handleInputQuantity = (event:Event, productId:number) => {
 	</div>
 	<div v-else class="w-full flex flex-col items-center mb-8">
 		<h1 class="text-xl text-gray-600 font-bold my-2">My Cart</h1>
-		<table class="hidden md:block w-full md:w-9/12 text-sm text-left rtl:text-right text-gray-500">
+		<table class="hidden md:table w-full md:w-9/12 text-sm text-left rtl:text-right text-gray-500">
 			<thead class="text-xs text-gray-700 uppercase bg-gray-50">
 				<tr>
 					<th scope="col" class="px-2 py-3">
