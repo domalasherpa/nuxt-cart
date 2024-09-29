@@ -1,4 +1,4 @@
-interface Item {
+export interface Item {
     id: number;
     title: string;
     price: number;
@@ -9,4 +9,3 @@ interface Item {
     quantity:number;
 }
 
-export type {Item}
