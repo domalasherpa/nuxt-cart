@@ -20,6 +20,8 @@ export const useCartStore = defineStore('cartStore', ()=>{
     });
 
 
+    
+
     const increaseQnty= (productId:number)=>{
         if(carts[productId].quantity < carts[productId].availableQuantity){
             carts[productId].quantity += 1;
